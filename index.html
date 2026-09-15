@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RA ISOKEY - Premium Link</title>
+    <!-- Font Awesome untuk Ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Animasi Background Bergerak */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Animasi Fade In */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Animasi Putar Piringan Musik */
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        body {
+            /* Warna latar belakang bergradasi yang dianimasikan */
+            background: linear-gradient(-45deg, #0a0a0a, #1a1a24, #0d1117, #000000);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px; 
+            padding: 30px 20px;
+            position: relative;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        /* Ikon Audio Kanan Atas */
+        .top-right-icon {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #7bb5d6;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .top-right-icon:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: scale(1.05);
+        }
+
+        /* Profil Utama */
+        .profile-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        .profile-pic-main {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            box-shadow: 0 0 25px rgba(123, 181, 214, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .profile-name {
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            letter-spacing: 0.5px;
+        }
+
+        .profile-desc {
+            font-size: 14px;
+            color: #b0b0b0;
+            margin-bottom: 25px;
+            font-weight: 300;
+        }
+
+        /* Ikon Sosial Media */
+        .social-icons {
+            display: flex;
+            gap: 25px;
+            margin-bottom: 35px;
+        }
+
+        .social-icons i {
+            font-size: 26px;
+            color: #ffffff;
+            cursor: pointer;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .social-icons i:hover {
+            transform: translateY(-3px);
+            color: #7bb5d6;
+        }
+
+        /* Glassmorphism Card (Kartu Transparan) */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 18px;
+            margin-bottom: 20px;
+            width: 100%;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+        }
+
+        /* Kartu Musik / Info Profil Kedua */
+        .music-card {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .music-pic-container {
+            position: relative;
+        }
+
+        .music-pic {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Class untuk memutar gambar saat musik nyala */
+        .spin-active {
+            animation: spin 4s linear infinite;
+        }
+
+        .online-dot {
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            width: 14px;
+            height: 14px;
+            background-color: #23a559;
+            border-radius: 50%;
+            border: 3px solid #1c1c1c;
+        }
+
+        .music-info {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            flex-grow: 1;
+        }
+
+        .music-title-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .pro-badge {
+            background: linear-gradient(45deg, #ff0000, #ff4d4d);
+            color: white;
+            font-size: 10px;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-weight: 700;
+            box-shadow: 0 2px 5px rgba(255, 0, 0, 0.3);
+        }
+
+        .crown-icon {
+            color: #ffcc00;
+            font-size: 14px;
+            filter: drop-shadow(0 0 2px rgba(255, 204, 0, 0.5));
+        }
+
+        .music-subtitle {
+            font-size: 13px;
+            color: #d0d0d0;
+            font-weight: 600;
+        }
+
+        .music-song {
+            font-size: 12px;
+            color: #909090;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .music-wave {
+            display: none;
+            gap: 2px;
+            height: 10px;
+            align-items: flex-end;
+        }
+
+        .music-wave.active {
+            display: flex;
+        }
+
+        .wave-bar {
+            width: 3px;
+            background-color: #7bb5d6;
+            animation: bounce 1s infinite ease-in-out;
+        }
+
+        .wave-bar:nth-child(1) { height: 100%; animation-delay: 0s; }
+        .wave-bar:nth-child(2) { height: 60%; animation-delay: 0.2s; }
+        .wave-bar:nth-child(3) { height: 80%; animation-delay: 0.4s; }
+
+        @keyframes bounce {
+            0%, 100% { transform: scaleY(0.5); }
+            50% { transform: scaleY(1); }
+        }
+
+        /* Baris Statistik */
+        .stats-row {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 10px 5px;
+            margin-bottom: 30px;
+            color: #a0a0a0;
+            font-size: 13px;
+            font-weight: 600;
+            width: 100%;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: color 0.3s ease;
+        }
+        
+        .stat-item:hover {
+            color: #ffffff;
+        }
+
+        /* Tombol Link (Info Stock, Testimoni) */
+        .link-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-decoration: none;
+            color: #ffffff;
+            cursor: pointer;
+        }
+
+        .link-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: scale(0.98) translateY(-2px);
+        }
+
+        .link-text h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            letter-spacing: 0.3px;
+        }
+
+        .link-text p {
+            font-size: 12px;
+            color: #a0a0a0;
+            font-weight: 400;
+        }
+
+        .link-icon {
+            color: #a0a0a0;
+            font-size: 20px;
+            transition: color 0.3s ease;
+        }
+
+        .link-card:hover .link-icon {
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Masukkan link lagu (MP3) Anda di dalam atribut src di bawah ini -->
+    <!-- Contoh menggunakan musik no copyright sementara -->
+    <audio id="bgMusic" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" loop></audio>
+
+    <div class="container">
+        <!-- Ikon Audio Atas -->
+        <div class="top-right-icon" id="audioToggle">
+            <!-- Ikon awal dicoret karena musik pause dari awal (browser membatasi autoplay) -->
+            <i class="fa-solid fa-volume-xmark" id="audioIcon"></i>
+        </div>
+
+        <!-- Bagian Profil -->
+        <div class="profile-section">
+            <!-- Ganti URL gambar dengan foto profil asli -->
+            <img src="foto.jpg" alt="Profile" class="profile-pic-main">
+            <h1 class="profile-name">RA ISOKEY</h1>
+            <p class="profile-desc">Buy/Sell Account Only at RA ISOKEY</p>
+            
+            <div class="social-icons">
+                <a href="#" style="text-decoration: none; color: inherit;"><i class="fa-brands fa-tiktok"></i></a>
+                <a href="#" style="text-decoration: none; color: inherit;"><i class="fa-brands fa-whatsapp"></i></a>
+            </div>
+        </div>
+
+        <!-- Kartu Now Playing / Profil Mini -->
+        <div class="glass-card music-card">
+            <div class="music-pic-container">
+                <img src="foto.jpg" alt="Mini Profile" class="music-pic" id="musicDisc">
+                <div class="online-dot"></div>
+            </div>
+            <div class="music-info">
+                <div class="music-title-row">
+                    Ra ISOKEY
+                    <span class="pro-badge">PRO+</span>
+                    <i class="fa-solid fa-crown crown-icon"></i>
+                </div>
+                <div class="music-subtitle">Ra ISOKEY</div>
+                <div class="music-song">
+                    Unravel - 凛として時雨 / TK
+                    <!-- Animasi wave saat musik nyala -->
+                    <div class="music-wave" id="musicWave">
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Statistik -->
+        <div class="stats-row">
+            <div class="stat-item"><i class="fa-regular fa-eye"></i> 12K</div>
+            <div class="stat-item"><i class="fa-solid fa-user-group"></i> 1.1K</div>
+            <div class="stat-item"><i class="fa-solid fa-heart"></i> 11.6K</div>
+            <div class="stat-item"><i class="fa-solid fa-cart-shopping"></i> 43 +</div>
+            <div class="stat-item"><i class="fa-solid fa-signal"></i> 1.02</div>
+        </div>
+
+        <!-- Tombol Link 1 -->
+        <a href="#" class="glass-card link-card">
+            <div class="link-text">
+                <h3>Info Stock Account</h3>
+                <p>Saluran khusus Post Account</p>
+            </div>
+            <i class="fa-solid fa-arrow-up-right-from-square link-icon"></i>
+        </a>
+
+        <!-- Tombol Link 2 -->
+        <a href="https://whatsapp.com/channel/0029Vb6XBmL6rsQlgcYat21N" class="glass-card link-card">
+            <div class="link-text">
+                <h3>Testimoni Jual/beli Account</h3>
+                <p>Saluran Khusus Jual/beli Account</p>
+            </div>
+            <i class="fa-solid fa-arrow-up-right-from-square link-icon"></i>
+        </a>
+    </div>
+
+    <!-- Script untuk memfungsikan tombol musik -->
+    <script>
+        const audio = document.getElementById('bgMusic');
+        const audioToggleBtn = document.getElementById('audioToggle');
+        const audioIcon = document.getElementById('audioIcon');
+        const musicDisc = document.getElementById('musicDisc');
+        const musicWave = document.getElementById('musicWave');
+        let isPlaying = false;
+
+        audioToggleBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                // Pause Musik
+                audio.pause();
+                audioIcon.classList.remove('fa-volume-high');
+                audioIcon.classList.add('fa-volume-xmark');
+                
+                // Matikan animasi
+                musicDisc.classList.remove('spin-active');
+                musicWave.classList.remove('active');
+            } else {
+                // Play Musik
+                audio.play().catch(error => {
+                    console.log("Browser mencegah putar otomatis", error);
+                });
+                audioIcon.classList.remove('fa-volume-xmark');
+                audioIcon.classList.add('fa-volume-high');
+                
+                // Nyalakan animasi
+                musicDisc.classList.add('spin-active');
+                musicWave.classList.add('active');
+            }
+            isPlaying = !isPlaying;
+        });
+    </script>
+</body>
+</html>
