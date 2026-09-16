@@ -18,10 +18,11 @@
         }
 
         body {
-            background: linear-gradient(-45deg, #09090b, #18181b, #121214, #000000);
+            /* Latar belakang gradasi Pink pastel cerah */
+            background: linear-gradient(135deg, #ffe4e1, #ffb6c1, #ffc0cb, #ffe4e1);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
-            color: #ffffff;
+            color: #333333;
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -29,14 +30,14 @@
             position: relative;
         }
 
+        /* Motif Bunga Tipis di Latar Belakang (Statik) */
         body::before {
             content: "";
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
-            background-image: 
-                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-            background-size: 40px 40px;
+            background-image: url('https://www.transparenttextures.com/patterns/flowers.png');
+            background-repeat: repeat;
+            opacity: 0.4;
             z-index: 0;
             pointer-events: none;
         }
@@ -48,6 +49,36 @@
         }
 
         /* =========================================
+           DEKORASI BUNGA BERGUGURAN (FLOATING FLOWERS)
+           ========================================= */
+        .flower {
+            position: fixed;
+            top: -10%;
+            z-index: 0;
+            user-select: none;
+            pointer-events: none;
+            animation: fall linear infinite;
+            filter: drop-shadow(0 2px 4px rgba(216, 27, 96, 0.2));
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-10vh) translateX(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.8; }
+            50% { transform: translateY(50vh) translateX(20px) rotate(180deg); }
+            90% { opacity: 0.8; }
+            100% { transform: translateY(110vh) translateX(-20px) rotate(360deg); opacity: 0; }
+        }
+
+        /* Pengaturan posisi dan kecepatan jatuh masing-masing bunga */
+        .flower:nth-child(1) { left: 5%; font-size: 24px; animation-duration: 12s; animation-delay: 0s; }
+        .flower:nth-child(2) { left: 25%; font-size: 32px; animation-duration: 15s; animation-delay: 2s; }
+        .flower:nth-child(3) { left: 45%; font-size: 20px; animation-duration: 11s; animation-delay: 4s; }
+        .flower:nth-child(4) { left: 65%; font-size: 28px; animation-duration: 14s; animation-delay: 1s; }
+        .flower:nth-child(5) { left: 85%; font-size: 25px; animation-duration: 13s; animation-delay: 3s; }
+        .flower:nth-child(6) { left: 15%; font-size: 30px; animation-duration: 16s; animation-delay: 5s; }
+        .flower:nth-child(7) { left: 75%; font-size: 22px; animation-duration: 12s; animation-delay: 6s; }
+
+        /* =========================================
            LAYAR WELCOME (TAP ANYWHERE)
            ========================================= */
         #welcomeOverlay {
@@ -56,7 +87,7 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background-color: #050505; /* Warna gelap solid */
+            background-color: rgba(255, 192, 203, 0.95); 
             z-index: 9999;
             display: flex;
             align-items: center;
@@ -66,16 +97,16 @@
         }
 
         .welcome-card {
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(255, 255, 255, 0.6);
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.8);
             border-radius: 20px;
             padding: 40px 60px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            box-shadow: 0 10px 40px rgba(255, 105, 180, 0.2);
             animation: floatCard 3s ease-in-out infinite;
         }
 
@@ -88,31 +119,34 @@
             width: 100px;
             height: 100px;
             object-fit: cover;
-            border-radius: 16px; /* Dibuat agak kotak seperti di screenshot */
+            border-radius: 16px; 
             margin-bottom: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);
+            border: 3px solid white;
         }
 
         .welcome-name {
             font-size: 18px;
-            font-weight: 600;
+            font-weight: 700;
             margin-bottom: 25px;
             letter-spacing: 1px;
+            color: #d81b60; /* Pink Tua */
         }
 
         .welcome-tap {
             font-size: 11px;
-            color: #888;
+            color: #d81b60;
             letter-spacing: 3px;
             animation: blinkText 1.5s infinite;
             display: flex;
             align-items: center;
             gap: 15px;
+            font-weight: 600;
         }
 
         @keyframes blinkText {
             0%, 100% { opacity: 1; }
-            50% { opacity: 0.2; }
+            50% { opacity: 0.4; }
         }
 
         /* =========================================
@@ -132,7 +166,7 @@
             opacity: 0; 
             animation: slideUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             position: relative;
-            z-index: 1;
+            z-index: 2; /* Dinaikkan agar di atas animasi bunga */
         }
 
         .animate-text {
@@ -141,7 +175,6 @@
             display: block;
         }
 
-        /* Delay Animations */
         .delay-1 { animation-delay: 0.1s; }
         .delay-2 { animation-delay: 0.3s; }
         .delay-3 { animation-delay: 0.5s; }
@@ -164,7 +197,7 @@
            ========================================= */
         .main-wrapper {
             width: 100%;
-            display: none; /* Disembunyikan awalnya */
+            display: none;
             justify-content: center;
         }
 
@@ -173,7 +206,7 @@
             max-width: 480px; 
             padding: 30px 20px;
             position: relative;
-            z-index: 1;
+            z-index: 2;
         }
 
         /* Ikon Audio Kanan Atas */
@@ -183,22 +216,22 @@
             right: 25px;
             width: 45px;
             height: 45px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.7);
+            border: 2px solid #ffffff;
             backdrop-filter: blur(10px);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #7bb5d6;
+            color: #d81b60;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
             z-index: 10;
         }
 
         .top-right-icon:hover {
-            background: rgba(255, 255, 255, 0.15);
+            background: #ffffff;
             transform: scale(1.1) rotate(5deg);
         }
 
@@ -216,9 +249,9 @@
             border-radius: 50%;
             object-fit: cover;
             margin-bottom: 15px;
-            box-shadow: 0 0 30px rgba(123, 181, 214, 0.2);
-            border: 3px solid rgba(255, 255, 255, 0.15);
-            padding: 3px;
+            box-shadow: 0 0 30px rgba(255, 105, 180, 0.4);
+            border: 4px solid #ffffff;
+            padding: 2px;
         }
 
         .profile-name {
@@ -226,46 +259,48 @@
             font-weight: 700;
             margin-bottom: 6px;
             letter-spacing: 0.5px;
+            color: #c2185b;
         }
 
         .profile-desc {
             font-size: 14px;
-            color: #a1a1aa;
+            color: #880e4f;
             margin-bottom: 20px;
-            font-weight: 400;
+            font-weight: 500;
         }
 
         .social-icons {
             display: flex;
             gap: 20px;
             margin-bottom: 35px;
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(255, 255, 255, 0.6);
             padding: 10px 25px;
             border-radius: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 2px solid #ffffff;
+            box-shadow: 0 4px 10px rgba(255, 105, 180, 0.1);
         }
 
         .social-icons a {
-            color: #ffffff;
+            color: #d81b60;
             font-size: 22px;
             transition: all 0.3s ease;
         }
 
         .social-icons a:hover {
             transform: translateY(-3px);
-            color: #7bb5d6;
+            color: #f06292;
         }
 
         .glass-card {
-            background: rgba(255, 255, 255, 0.04);
+            background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 2px solid #ffffff;
             border-radius: 20px;
             padding: 18px;
             margin-bottom: 15px;
             width: 100%;
-            box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 10px 40px -10px rgba(255, 105, 180, 0.2);
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.3s ease;
         }
 
@@ -284,7 +319,8 @@
             height: 55px;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid rgba(255, 255, 255, 0.1);
+            border: 2px solid #ffffff;
+            box-shadow: 0 4px 10px rgba(255, 105, 180, 0.3);
         }
 
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
@@ -298,7 +334,7 @@
             height: 14px;
             background-color: #10b981;
             border-radius: 50%;
-            border: 3px solid #121214;
+            border: 3px solid #ffffff;
         }
 
         .music-info {
@@ -314,15 +350,17 @@
             gap: 8px;
             font-weight: 700;
             font-size: 16px;
+            color: #d81b60;
         }
 
         .pro-badge {
-            background: linear-gradient(135deg, #ef4444, #dc2626);
+            background: linear-gradient(135deg, #f43f5e, #e11d48);
             color: white;
             font-size: 10px;
             padding: 2px 8px;
             border-radius: 12px;
             font-weight: 700;
+            box-shadow: 0 2px 5px rgba(225, 29, 72, 0.3);
         }
 
         .crown-icon {
@@ -330,12 +368,12 @@
             font-size: 14px;
         }
 
-        .music-subtitle { font-size: 13px; color: #d4d4d8; font-weight: 500; }
-        .music-song { font-size: 12px; color: #a1a1aa; display: flex; align-items: center; gap: 8px; }
+        .music-subtitle { font-size: 13px; color: #ad1457; font-weight: 600; }
+        .music-song { font-size: 12px; color: #880e4f; display: flex; align-items: center; gap: 8px; font-weight: 500;}
 
         .music-wave { display: none; gap: 3px; height: 12px; align-items: flex-end; }
         .music-wave.active { display: flex; }
-        .wave-bar { width: 3px; background-color: #7bb5d6; animation: bounce 1s infinite ease-in-out; border-radius: 2px; }
+        .wave-bar { width: 3px; background-color: #d81b60; animation: bounce 1s infinite ease-in-out; border-radius: 2px; }
         .wave-bar:nth-child(1) { height: 100%; animation-delay: 0s; }
         .wave-bar:nth-child(2) { height: 60%; animation-delay: 0.2s; }
         .wave-bar:nth-child(3) { height: 80%; animation-delay: 0.4s; }
@@ -345,27 +383,28 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(255, 255, 255, 0.02);
+            background: rgba(255, 255, 255, 0.7);
             border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 2px solid #ffffff;
             padding: 15px 20px;
             margin-bottom: 25px;
-            color: #a1a1aa;
+            color: #ad1457;
             font-size: 13px;
-            font-weight: 600;
+            font-weight: 700;
             width: 100%;
+            box-shadow: 0 4px 15px rgba(255, 105, 180, 0.15);
         }
 
         .stat-item { display: flex; flex-direction: column; align-items: center; gap: 5px; transition: color 0.3s ease; }
-        .stat-item i { font-size: 16px; color: #7bb5d6; }
-        .stat-item:hover { color: #ffffff; }
+        .stat-item i { font-size: 16px; color: #d81b60; }
+        .stat-item:hover { color: #f06292; }
 
         .link-card {
             display: flex;
             justify-content: space-between;
             align-items: center;
             text-decoration: none;
-            color: #ffffff;
+            color: #d81b60; 
             cursor: pointer;
             overflow: hidden;
             position: relative;
@@ -373,34 +412,48 @@
 
         .link-card::before {
             content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
             transform: skewX(-20deg); transition: 0.5s;
         }
 
         .link-card:hover::before { left: 150%; }
-        .link-card:hover { background: rgba(255, 255, 255, 0.08); border-color: rgba(255, 255, 255, 0.15); transform: scale(1.02); }
+        .link-card:hover { 
+            background: #ffffff; 
+            border-color: #fbcfe8; 
+            transform: scale(1.02); 
+            box-shadow: 0 15px 30px rgba(255, 105, 180, 0.3);
+        }
 
-        .link-text h3 { font-size: 15px; font-weight: 600; margin-bottom: 5px; }
-        .link-text p { font-size: 12px; color: #a1a1aa; font-weight: 400; }
+        .link-text h3 { font-size: 15px; font-weight: 700; margin-bottom: 5px; color:#c2185b;}
+        .link-text p { font-size: 12px; color: #ad1457; font-weight: 500; }
         .link-icon {
-            color: #a1a1aa; font-size: 18px; background: rgba(255, 255, 255, 0.05);
+            color: #ffffff; font-size: 18px; background: #d81b60;
             width: 35px; height: 35px; display: flex; align-items: center; justify-content: center;
             border-radius: 50%; transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(216, 27, 96, 0.4);
         }
-        .link-card:hover .link-icon { color: #ffffff; background: #7bb5d6; }
+        .link-card:hover .link-icon { background: #f06292; transform: scale(1.1);}
     </style>
 </head>
 <body>
 
-    <!-- Audio MP3 (Tetap Menggunakan file Anda) -->
+    <!-- Audio MP3 -->
     <audio id="bgMusic" src="lagu.mp3" loop></audio>
+
+    <!-- Dekorasi Animasi Bunga Jatuh -->
+    <div class="flower">🌸</div>
+    <div class="flower">💮</div>
+    <div class="flower">🌺</div>
+    <div class="flower">🌸</div>
+    <div class="flower">💮</div>
+    <div class="flower">🌺</div>
+    <div class="flower">🌸</div>
 
     <!-- ==========================================
          LAYAR AWAL (OVERLAY TAP ANYWHERE)
          ========================================== -->
     <div id="welcomeOverlay">
         <div class="welcome-card">
-            <!-- Ganti src foto.jpg dengan foto Anda -->
             <img src="foto.jpg" alt="Profile" class="welcome-pic">
             <h2 class="welcome-name">NONA RA</h2>
             <div class="welcome-tap">
@@ -410,18 +463,15 @@
     </div>
 
     <!-- ==========================================
-         HALAMAN UTAMA (Diaktifkan lewat JavaScript)
+         HALAMAN UTAMA
          ========================================== -->
     <div id="mainContent" class="main-wrapper">
         
-        <!-- Tombol Ikon Audio Atas -->
         <div class="top-right-icon animate-item delay-1" id="audioToggle">
-            <!-- Icon di set ke Xmark karena audio diputar lewat klik layar depan -->
             <i class="fa-solid fa-volume-high" id="audioIcon"></i>
         </div>
 
         <div class="container">
-            <!-- Bagian Profil -->
             <div class="profile-section animate-item delay-2">
                 <img src="foto.jpg" alt="Profile" class="profile-pic-main">
                 <h1 class="profile-name animate-text t-delay-1">NONA RA</h1>
@@ -433,7 +483,6 @@
                 </div>
             </div>
 
-            <!-- Kartu Now Playing / Profil Mini -->
             <div class="glass-card music-card animate-item delay-3">
                 <div class="music-pic-container">
                     <img src="foto.jpg" alt="Mini Profile" class="music-pic spin-active" id="musicDisc">
@@ -457,7 +506,6 @@
                 </div>
             </div>
 
-            <!-- Statistik -->
             <div class="stats-row animate-item delay-4">
                 <div class="stat-item"><i class="fa-regular fa-eye"></i> 15K+</div>
                 <div class="stat-item"><i class="fa-solid fa-users"></i> 2.5K+</div>
@@ -466,7 +514,6 @@
                 <div class="stat-item"><i class="fa-solid fa-bolt" style="color: #fbbf24;"></i> 24/7</div>
             </div>
 
-            <!-- Tombol Link 1 -->
             <a href="https://padlet.com/PremiumNona/priceless-apps-ip1le9h5urhtgd0z" class="glass-card link-card animate-item delay-5">
                 <div class="link-text">
                     <h3 class="animate-text t-delay-6">🛒 Katalog Aplikasi Premium</h3>
@@ -477,7 +524,6 @@
                 </div>
             </a>
 
-            <!-- Tombol Link 2 -->
             <a href="https://whatsapp.com/channel/0029Vb6XBmL6rsQlgcYat21N" class="glass-card link-card animate-item delay-6">
                 <div class="link-text">
                     <h3 class="animate-text t-delay-8">⭐ Bukti Testimoni Nona Ra</h3>
@@ -501,26 +547,21 @@
         const musicWave = document.getElementById('musicWave');
         let isPlaying = false;
 
-        // Saat layar Tap Anywhere di-klik
         overlay.addEventListener('click', () => {
-            // 1. Play Musik
             audio.play().then(() => {
                 isPlaying = true;
             }).catch(e => {
                 console.log("Audio failed to play", e);
             });
 
-            // 2. Hilangkan Overlay dengan animasi fade
             overlay.style.opacity = '0';
             
-            // 3. Tunggu setengah detik (0.5s), lalu hapus overlay dan tampilkan layar utama
             setTimeout(() => {
                 overlay.style.display = 'none';
-                mainContent.style.display = 'flex'; // Animasi CSS akan otomatis mulai sekarang!
+                mainContent.style.display = 'flex'; 
             }, 500);
         });
 
-        // Tombol Pause/Play Audio di sudut kanan atas halaman utama
         audioToggleBtn.addEventListener('click', () => {
             if (isPlaying) {
                 audio.pause();
