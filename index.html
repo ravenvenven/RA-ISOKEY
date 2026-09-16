@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RA ISOKEY - Premium Link</title>
+    <title>NONA RA - Premium Link</title>
     <!-- Font Awesome untuk Ikon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
         * {
             margin: 0;
@@ -17,28 +17,8 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* Animasi Background Bergerak */
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* Animasi Fade In */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Animasi Putar Piringan Musik */
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
         body {
-            /* Warna latar belakang bergradasi yang dianimasikan */
-            background: linear-gradient(-45deg, #0a0a0a, #1a1a24, #0d1117, #000000);
+            background: linear-gradient(-45deg, #09090b, #18181b, #121214, #000000);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
             color: #ffffff;
@@ -46,6 +26,146 @@
             display: flex;
             justify-content: center;
             overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* =========================================
+           LAYAR WELCOME (TAP ANYWHERE)
+           ========================================= */
+        #welcomeOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #050505; /* Warna gelap solid */
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: opacity 0.5s ease, visibility 0.5s;
+        }
+
+        .welcome-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 40px 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            animation: floatCard 3s ease-in-out infinite;
+        }
+
+        @keyframes floatCard {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .welcome-pic {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 16px; /* Dibuat agak kotak seperti di screenshot */
+            margin-bottom: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .welcome-name {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+        }
+
+        .welcome-tap {
+            font-size: 11px;
+            color: #888;
+            letter-spacing: 3px;
+            animation: blinkText 1.5s infinite;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        @keyframes blinkText {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.2; }
+        }
+
+        /* =========================================
+           ANIMASI HALAMAN UTAMA
+           ========================================= */
+        @keyframes slideUp {
+            0% { opacity: 0; transform: translateY(40px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideRight {
+            0% { opacity: 0; transform: translateX(-30px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+
+        .animate-item {
+            opacity: 0; 
+            animation: slideUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            position: relative;
+            z-index: 1;
+        }
+
+        .animate-text {
+            opacity: 0;
+            animation: slideRight 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            display: block;
+        }
+
+        /* Delay Animations */
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.3s; }
+        .delay-3 { animation-delay: 0.5s; }
+        .delay-4 { animation-delay: 0.7s; }
+        .delay-5 { animation-delay: 0.8s; }
+        .delay-6 { animation-delay: 0.9s; }
+
+        .t-delay-1 { animation-delay: 0.5s; }
+        .t-delay-2 { animation-delay: 0.6s; }
+        .t-delay-3 { animation-delay: 0.8s; }
+        .t-delay-4 { animation-delay: 0.9s; }
+        .t-delay-5 { animation-delay: 1.0s; }
+        .t-delay-6 { animation-delay: 1.2s; }
+        .t-delay-7 { animation-delay: 1.3s; }
+        .t-delay-8 { animation-delay: 1.4s; }
+        .t-delay-9 { animation-delay: 1.5s; }
+
+        /* =========================================
+           STYLING HALAMAN UTAMA
+           ========================================= */
+        .main-wrapper {
+            width: 100%;
+            display: none; /* Disembunyikan awalnya */
+            justify-content: center;
         }
 
         .container {
@@ -53,7 +173,7 @@
             max-width: 480px; 
             padding: 30px 20px;
             position: relative;
-            animation: fadeInUp 0.8s ease-out;
+            z-index: 1;
         }
 
         /* Ikon Audio Kanan Atas */
@@ -63,7 +183,7 @@
             right: 25px;
             width: 45px;
             height: 45px;
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
             border-radius: 50%;
@@ -73,16 +193,15 @@
             color: #7bb5d6;
             cursor: pointer;
             transition: all 0.3s ease;
-            z-index: 10;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 10;
         }
 
         .top-right-icon:hover {
             background: rgba(255, 255, 255, 0.15);
-            transform: scale(1.05);
+            transform: scale(1.1) rotate(5deg);
         }
 
-        /* Profil Utama */
         .profile-section {
             display: flex;
             flex-direction: column;
@@ -92,63 +211,64 @@
         }
 
         .profile-pic-main {
-            width: 100px;
-            height: 100px;
+            width: 110px;
+            height: 110px;
             border-radius: 50%;
             object-fit: cover;
             margin-bottom: 15px;
-            box-shadow: 0 0 25px rgba(123, 181, 214, 0.3);
-            border: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 30px rgba(123, 181, 214, 0.2);
+            border: 3px solid rgba(255, 255, 255, 0.15);
+            padding: 3px;
         }
 
         .profile-name {
             font-size: 26px;
             font-weight: 700;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
             letter-spacing: 0.5px;
         }
 
         .profile-desc {
             font-size: 14px;
-            color: #b0b0b0;
-            margin-bottom: 25px;
-            font-weight: 300;
+            color: #a1a1aa;
+            margin-bottom: 20px;
+            font-weight: 400;
         }
 
-        /* Ikon Sosial Media */
         .social-icons {
             display: flex;
-            gap: 25px;
+            gap: 20px;
             margin-bottom: 35px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 10px 25px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        .social-icons i {
-            font-size: 26px;
+        .social-icons a {
             color: #ffffff;
-            cursor: pointer;
-            transition: transform 0.3s ease, color 0.3s ease;
+            font-size: 22px;
+            transition: all 0.3s ease;
         }
 
-        .social-icons i:hover {
+        .social-icons a:hover {
             transform: translateY(-3px);
             color: #7bb5d6;
         }
 
-        /* Glassmorphism Card (Kartu Transparan) */
         .glass-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 20px;
             padding: 18px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             width: 100%;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+            box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.3s ease;
         }
 
-        /* Kartu Musik / Info Profil Kedua */
         .music-card {
             display: flex;
             align-items: center;
@@ -167,10 +287,8 @@
             border: 2px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* Class untuk memutar gambar saat musik nyala */
-        .spin-active {
-            animation: spin 4s linear infinite;
-        }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .spin-active { animation: spin 4s linear infinite; }
 
         .online-dot {
             position: absolute;
@@ -178,15 +296,15 @@
             right: 2px;
             width: 14px;
             height: 14px;
-            background-color: #23a559;
+            background-color: #10b981;
             border-radius: 50%;
-            border: 3px solid #1c1c1c;
+            border: 3px solid #121214;
         }
 
         .music-info {
             display: flex;
             flex-direction: column;
-            gap: 5px;
+            gap: 4px;
             flex-grow: 1;
         }
 
@@ -199,86 +317,49 @@
         }
 
         .pro-badge {
-            background: linear-gradient(45deg, #ff0000, #ff4d4d);
+            background: linear-gradient(135deg, #ef4444, #dc2626);
             color: white;
             font-size: 10px;
-            padding: 3px 8px;
+            padding: 2px 8px;
             border-radius: 12px;
             font-weight: 700;
-            box-shadow: 0 2px 5px rgba(255, 0, 0, 0.3);
         }
 
         .crown-icon {
-            color: #ffcc00;
+            color: #fbbf24;
             font-size: 14px;
-            filter: drop-shadow(0 0 2px rgba(255, 204, 0, 0.5));
         }
 
-        .music-subtitle {
-            font-size: 13px;
-            color: #d0d0d0;
-            font-weight: 600;
-        }
+        .music-subtitle { font-size: 13px; color: #d4d4d8; font-weight: 500; }
+        .music-song { font-size: 12px; color: #a1a1aa; display: flex; align-items: center; gap: 8px; }
 
-        .music-song {
-            font-size: 12px;
-            color: #909090;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .music-wave {
-            display: none;
-            gap: 2px;
-            height: 10px;
-            align-items: flex-end;
-        }
-
-        .music-wave.active {
-            display: flex;
-        }
-
-        .wave-bar {
-            width: 3px;
-            background-color: #7bb5d6;
-            animation: bounce 1s infinite ease-in-out;
-        }
-
+        .music-wave { display: none; gap: 3px; height: 12px; align-items: flex-end; }
+        .music-wave.active { display: flex; }
+        .wave-bar { width: 3px; background-color: #7bb5d6; animation: bounce 1s infinite ease-in-out; border-radius: 2px; }
         .wave-bar:nth-child(1) { height: 100%; animation-delay: 0s; }
         .wave-bar:nth-child(2) { height: 60%; animation-delay: 0.2s; }
         .wave-bar:nth-child(3) { height: 80%; animation-delay: 0.4s; }
+        @keyframes bounce { 0%, 100% { transform: scaleY(0.5); } 50% { transform: scaleY(1); } }
 
-        @keyframes bounce {
-            0%, 100% { transform: scaleY(0.5); }
-            50% { transform: scaleY(1); }
-        }
-
-        /* Baris Statistik */
         .stats-row {
             display: flex;
-            justify-content: space-around;
+            justify-content: space-between;
             align-items: center;
-            padding: 10px 5px;
-            margin-bottom: 30px;
-            color: #a0a0a0;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 15px 20px;
+            margin-bottom: 25px;
+            color: #a1a1aa;
             font-size: 13px;
             font-weight: 600;
             width: 100%;
         }
 
-        .stat-item {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: color 0.3s ease;
-        }
-        
-        .stat-item:hover {
-            color: #ffffff;
-        }
+        .stat-item { display: flex; flex-direction: column; align-items: center; gap: 5px; transition: color 0.3s ease; }
+        .stat-item i { font-size: 16px; color: #7bb5d6; }
+        .stat-item:hover { color: #ffffff; }
 
-        /* Tombol Link (Info Stock, Testimoni) */
         .link-card {
             display: flex;
             justify-content: space-between;
@@ -286,145 +367,171 @@
             text-decoration: none;
             color: #ffffff;
             cursor: pointer;
+            overflow: hidden;
+            position: relative;
         }
 
-        .link-card:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.2);
-            transform: scale(0.98) translateY(-2px);
+        .link-card::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+            transform: skewX(-20deg); transition: 0.5s;
         }
 
-        .link-text h3 {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 6px;
-            letter-spacing: 0.3px;
-        }
+        .link-card:hover::before { left: 150%; }
+        .link-card:hover { background: rgba(255, 255, 255, 0.08); border-color: rgba(255, 255, 255, 0.15); transform: scale(1.02); }
 
-        .link-text p {
-            font-size: 12px;
-            color: #a0a0a0;
-            font-weight: 400;
-        }
-
+        .link-text h3 { font-size: 15px; font-weight: 600; margin-bottom: 5px; }
+        .link-text p { font-size: 12px; color: #a1a1aa; font-weight: 400; }
         .link-icon {
-            color: #a0a0a0;
-            font-size: 20px;
-            transition: color 0.3s ease;
+            color: #a1a1aa; font-size: 18px; background: rgba(255, 255, 255, 0.05);
+            width: 35px; height: 35px; display: flex; align-items: center; justify-content: center;
+            border-radius: 50%; transition: all 0.3s ease;
         }
-
-        .link-card:hover .link-icon {
-            color: #ffffff;
-        }
+        .link-card:hover .link-icon { color: #ffffff; background: #7bb5d6; }
     </style>
 </head>
 <body>
 
-    <!-- Masukkan link lagu (MP3) Anda di dalam atribut src di bawah ini -->
-    <!-- Contoh menggunakan musik no copyright sementara -->
-    <audio id="bgMusic" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" loop></audio>
+    <!-- Audio MP3 (Tetap Menggunakan file Anda) -->
+    <audio id="bgMusic" src="lagu.mp3" loop></audio>
 
-    <div class="container">
-        <!-- Ikon Audio Atas -->
-        <div class="top-right-icon" id="audioToggle">
-            <!-- Ikon awal dicoret karena musik pause dari awal (browser membatasi autoplay) -->
-            <i class="fa-solid fa-volume-xmark" id="audioIcon"></i>
-        </div>
-
-        <!-- Bagian Profil -->
-        <div class="profile-section">
-            <!-- Ganti URL gambar dengan foto profil asli -->
-            <img src="foto.jpg" alt="Profile" class="profile-pic-main">
-            <h1 class="profile-name">RA ISOKEY</h1>
-            <p class="profile-desc">Buy/Sell Account Only at RA ISOKEY</p>
-            
-            <div class="social-icons">
-                <a href="#" style="text-decoration: none; color: inherit;"><i class="fa-brands fa-tiktok"></i></a>
-                <a href="#" style="text-decoration: none; color: inherit;"><i class="fa-brands fa-whatsapp"></i></a>
+    <!-- ==========================================
+         LAYAR AWAL (OVERLAY TAP ANYWHERE)
+         ========================================== -->
+    <div id="welcomeOverlay">
+        <div class="welcome-card">
+            <!-- Ganti src foto.jpg dengan foto Anda -->
+            <img src="foto.jpg" alt="Profile" class="welcome-pic">
+            <h2 class="welcome-name">NONA RA</h2>
+            <div class="welcome-tap">
+                <span>&mdash;</span> TAP ANYWHERE <span>&mdash;</span>
             </div>
         </div>
+    </div>
 
-        <!-- Kartu Now Playing / Profil Mini -->
-        <div class="glass-card music-card">
-            <div class="music-pic-container">
-                <img src="foto.jpg" alt="Mini Profile" class="music-pic" id="musicDisc">
-                <div class="online-dot"></div>
-            </div>
-            <div class="music-info">
-                <div class="music-title-row">
-                    Ra ISOKEY
-                    <span class="pro-badge">PRO+</span>
-                    <i class="fa-solid fa-crown crown-icon"></i>
+    <!-- ==========================================
+         HALAMAN UTAMA (Diaktifkan lewat JavaScript)
+         ========================================== -->
+    <div id="mainContent" class="main-wrapper">
+        
+        <!-- Tombol Ikon Audio Atas -->
+        <div class="top-right-icon animate-item delay-1" id="audioToggle">
+            <!-- Icon di set ke Xmark karena audio diputar lewat klik layar depan -->
+            <i class="fa-solid fa-volume-high" id="audioIcon"></i>
+        </div>
+
+        <div class="container">
+            <!-- Bagian Profil -->
+            <div class="profile-section animate-item delay-2">
+                <img src="foto.jpg" alt="Profile" class="profile-pic-main">
+                <h1 class="profile-name animate-text t-delay-1">NONA RA</h1>
+                <p class="profile-desc animate-text t-delay-2">aplikasi premium by Nona Raa</p>
+                
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+                    <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
                 </div>
-                <div class="music-subtitle">Ra ISOKEY</div>
-                <div class="music-song">
-                    Unravel - 凛として時雨 / TK
-                    <!-- Animasi wave saat musik nyala -->
-                    <div class="music-wave" id="musicWave">
-                        <div class="wave-bar"></div>
-                        <div class="wave-bar"></div>
-                        <div class="wave-bar"></div>
+            </div>
+
+            <!-- Kartu Now Playing / Profil Mini -->
+            <div class="glass-card music-card animate-item delay-3">
+                <div class="music-pic-container">
+                    <img src="foto.jpg" alt="Mini Profile" class="music-pic spin-active" id="musicDisc">
+                    <div class="online-dot"></div>
+                </div>
+                <div class="music-info">
+                    <div class="music-title-row animate-text t-delay-3">
+                        Nona Ra
+                        <span class="pro-badge">PRO+</span>
+                        <i class="fa-solid fa-crown crown-icon"></i>
+                    </div>
+                    <div class="music-subtitle animate-text t-delay-4">Nona Ra</div>
+                    <div class="music-song animate-text t-delay-5">
+                        in another life
+                        <div class="music-wave active" id="musicWave">
+                            <div class="wave-bar"></div>
+                            <div class="wave-bar"></div>
+                            <div class="wave-bar"></div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Statistik -->
-        <div class="stats-row">
-            <div class="stat-item"><i class="fa-regular fa-eye"></i> 12K</div>
-            <div class="stat-item"><i class="fa-solid fa-user-group"></i> 1.1K</div>
-            <div class="stat-item"><i class="fa-solid fa-heart"></i> 11.6K</div>
-            <div class="stat-item"><i class="fa-solid fa-cart-shopping"></i> 43 +</div>
-            <div class="stat-item"><i class="fa-solid fa-signal"></i> 1.02</div>
-        </div>
-
-        <!-- Tombol Link 1 -->
-        <a href="#" class="glass-card link-card">
-            <div class="link-text">
-                <h3>Info Stock Account</h3>
-                <p>Saluran khusus Post Account</p>
+            <!-- Statistik -->
+            <div class="stats-row animate-item delay-4">
+                <div class="stat-item"><i class="fa-regular fa-eye"></i> 15K+</div>
+                <div class="stat-item"><i class="fa-solid fa-users"></i> 2.5K+</div>
+                <div class="stat-item"><i class="fa-solid fa-star" style="color: #fbbf24;"></i> 4.9/5</div>
+                <div class="stat-item"><i class="fa-solid fa-cart-shopping"></i> 10K+</div>
+                <div class="stat-item"><i class="fa-solid fa-bolt" style="color: #fbbf24;"></i> 24/7</div>
             </div>
-            <i class="fa-solid fa-arrow-up-right-from-square link-icon"></i>
-        </a>
 
-        <!-- Tombol Link 2 -->
-        <a href="https://whatsapp.com/channel/0029Vb6XBmL6rsQlgcYat21N" class="glass-card link-card">
-            <div class="link-text">
-                <h3>Testimoni Jual/beli Account</h3>
-                <p>Saluran Khusus Jual/beli Account</p>
-            </div>
-            <i class="fa-solid fa-arrow-up-right-from-square link-icon"></i>
-        </a>
+            <!-- Tombol Link 1 -->
+            <a href="https://padlet.com/PremiumNona/priceless-apps-ip1le9h5urhtgd0z" class="glass-card link-card animate-item delay-5">
+                <div class="link-text">
+                    <h3 class="animate-text t-delay-6">🛒 Katalog Aplikasi Premium</h3>
+                    <p class="animate-text t-delay-7">Pilih & order aplikasi kebutuhanmu di sini</p>
+                </div>
+                <div class="link-icon">
+                    <i class="fa-solid fa-store"></i>
+                </div>
+            </a>
+
+            <!-- Tombol Link 2 -->
+            <a href="https://whatsapp.com/channel/0029Vb6XBmL6rsQlgcYat21N" class="glass-card link-card animate-item delay-6">
+                <div class="link-text">
+                    <h3 class="animate-text t-delay-8">⭐ Bukti Testimoni Nona Ra</h3>
+                    <p class="animate-text t-delay-9">100% Trusted & Transaksi Bergaransi</p>
+                </div>
+                <div class="link-icon">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+            </a>
+        </div>
     </div>
 
-    <!-- Script untuk memfungsikan tombol musik -->
+    <!-- Script Logika Tap & Audio -->
     <script>
         const audio = document.getElementById('bgMusic');
+        const overlay = document.getElementById('welcomeOverlay');
+        const mainContent = document.getElementById('mainContent');
         const audioToggleBtn = document.getElementById('audioToggle');
         const audioIcon = document.getElementById('audioIcon');
         const musicDisc = document.getElementById('musicDisc');
         const musicWave = document.getElementById('musicWave');
         let isPlaying = false;
 
+        // Saat layar Tap Anywhere di-klik
+        overlay.addEventListener('click', () => {
+            // 1. Play Musik
+            audio.play().then(() => {
+                isPlaying = true;
+            }).catch(e => {
+                console.log("Audio failed to play", e);
+            });
+
+            // 2. Hilangkan Overlay dengan animasi fade
+            overlay.style.opacity = '0';
+            
+            // 3. Tunggu setengah detik (0.5s), lalu hapus overlay dan tampilkan layar utama
+            setTimeout(() => {
+                overlay.style.display = 'none';
+                mainContent.style.display = 'flex'; // Animasi CSS akan otomatis mulai sekarang!
+            }, 500);
+        });
+
+        // Tombol Pause/Play Audio di sudut kanan atas halaman utama
         audioToggleBtn.addEventListener('click', () => {
             if (isPlaying) {
-                // Pause Musik
                 audio.pause();
                 audioIcon.classList.remove('fa-volume-high');
                 audioIcon.classList.add('fa-volume-xmark');
-                
-                // Matikan animasi
                 musicDisc.classList.remove('spin-active');
                 musicWave.classList.remove('active');
             } else {
-                // Play Musik
-                audio.play().catch(error => {
-                    console.log("Browser mencegah putar otomatis", error);
-                });
+                audio.play();
                 audioIcon.classList.remove('fa-volume-xmark');
                 audioIcon.classList.add('fa-volume-high');
-                
-                // Nyalakan animasi
                 musicDisc.classList.add('spin-active');
                 musicWave.classList.add('active');
             }
